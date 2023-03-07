@@ -1,11 +1,18 @@
-cmake_minimum_required(VERSION 2.4) # sets a minimum cmake version required to evaluate current script
+CMAKE_MINIMUM_REQUIRED(VERSION 3.8)
+SET(PROJ_NAME "learn_three")
+PROJECT(${PROJ_NAME})
 
-project(hello_world) # starts a new CMake project. This will trigger a lot of internal CMake
-# logic, especially the detection of the default C and C++ compiler.
-include_directories(${PROJECT_SOURCE_DIR})
-# add_executable(app main.cpp foo.cpp) # With add_executable(app main.cpp) a build target app is created, which will invoke the
-#configured compiler with some default flags for the current setting to compile an executable
-#app from the given source file main.cpp.
-add_library(applib foo.cpp)
-add_executable(app main.cpp)
-target_link_libraries(app applib)
+# Configuration Types
+
+SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
+IF(DEFINED CMAKE_BUILD_TYPE AND CMAKE_VERSION VERSION_GREATER "2.8")
+    SET_PROPERTY(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${CMAKE_CONFIGURATION_TYPES})
+ENDIF()
+
+SET(${PROJ_NAME}_PATH_INSTALL "/opt/project" CACHE PATH "This directory contains installation Path")
+SET(CMAKE_DEBUG_POSTFIX "D")
+
+# install
+# -------------------------------------#
+INSTALL(TARGETS ${PROJ_NAME}
+    DESTINATION "${${PROJ_NAME}_PATH_INSTALL}/lib/${CMAKE_BUILD_TYPE}/")
