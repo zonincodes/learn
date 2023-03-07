@@ -1,7 +1,14 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.8)
-SET(PROJ_NAME "learn_three")
-PROJECT(${PROJ_NAME})
+cmake_minimum_required(VERSION 2.4)
+project(learn_three) 
+include_directories(${PROJECT_SOURCE_DIR})
+add_library(applib foo.cpp)
+add_executable(app main.cpp)
+target_link_libraries(app applib)
 
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
+SET(PROJ_NAME "app")
+PROJECT(${PROJ_NAME})
 # Configuration Types
 
 SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
@@ -15,4 +22,4 @@ SET(CMAKE_DEBUG_POSTFIX "D")
 # install
 # -------------------------------------#
 INSTALL(TARGETS ${PROJ_NAME}
-    DESTINATION "${${PROJ_NAME}_PATH_INSTALL}/lib/${CMAKE_BUILD_TYPE}/")
+    DESTINATION "${${PROJ_NAME}_PATH_INSTALL}/bin/${CMAKE_BUILD_TYPE}/")
