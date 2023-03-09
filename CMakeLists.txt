@@ -1,12 +1,9 @@
-cmake_minimum_required(VERSION 3.2) # sets a minimum cmake version required to evaluate current script
+cmake_minimum_required(VERSION 3.22)
 
-project(random) # starts a new CMake project. This will trigger a lot of internal CMake
-# logic, especially the detection of the default C and C++ compiler.
+project(random) 
 find_package(OpenGL REQUIRED)
 include_directories(${PROJECT_SOURCE_DIR})
-# add_executable(app main.cpp foo.cpp) # With add_executable(app main.cpp) a build target app is created, which will invoke the
-#configured compiler with some default flags for the current setting to compile an executable
-#app from the given source file main.cpp.
+
 add_executable(${PROJECT_NAME} main.cpp)
 
 # Download ALL THE SUBMODULES
@@ -33,19 +30,24 @@ if(NOT EXISTS "${PROJECT_SOURCE_DIR}/external/glfw/CMakeLists.txt")
 endif()
 
 add_subdirectory(external/glfw)
+add_subdirectory(external/linmath)
+add_subdirectory(src)
 
 
 
 add_library(applib foo.cpp)
-add_library(applip src/glad/glad.c)
 target_link_libraries(${PROJECT_NAME} applib)
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC external/glfw/include
+    PUBLIC linmath
+    PUBLIC src
 )
 
 target_link_directories(${PROJECT_NAME} 
+    PUBLIC external/linmath
     PUBLIC external/glfw/src
+    PUBLIC src
 )
 
-target_link_libraries(${PROJECT_NAME} glfw)
+target_link_libraries(${PROJECT_NAME} glfw linmath src)
