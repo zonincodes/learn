@@ -31,7 +31,7 @@ endif()
 
 add_subdirectory(external/glfw)
 add_subdirectory(external/linmath)
-add_subdirectory(src)
+add_subdirectory(external/glad)
 
 
 
@@ -40,14 +40,14 @@ target_link_libraries(${PROJECT_NAME} applib)
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC external/glfw/include
-    PUBLIC linmath
-    PUBLIC src
+    PUBLIC external/linmath
+    PUBLIC external/glad
 )
 
 target_link_directories(${PROJECT_NAME} 
     PUBLIC external/linmath
     PUBLIC external/glfw/src
-    PUBLIC src
+    PUBLIC external/glad
 )
 
-target_link_libraries(${PROJECT_NAME} glfw linmath src)
+target_link_libraries(${PROJECT_NAME} glfw linmath glad)
