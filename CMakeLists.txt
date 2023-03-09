@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.2) # sets a minimum cmake version required to e
 
 project(random) # starts a new CMake project. This will trigger a lot of internal CMake
 # logic, especially the detection of the default C and C++ compiler.
+find_package(OpenGL REQUIRED)
 include_directories(${PROJECT_SOURCE_DIR})
 # add_executable(app main.cpp foo.cpp) # With add_executable(app main.cpp) a build target app is created, which will invoke the
 #configured compiler with some default flags for the current setting to compile an executable
@@ -36,6 +37,7 @@ add_subdirectory(external/glfw)
 
 
 add_library(applib foo.cpp)
+add_library(applip src/glad/glad.c)
 target_link_libraries(${PROJECT_NAME} applib)
 
 target_include_directories(${PROJECT_NAME}

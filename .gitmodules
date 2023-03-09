@@ -4,3 +4,6 @@
 [submodule "external/glad"]
 	path = external/glad
 	url = https://github.com/Dav1dde/glad.git
+[submodule "external/linmath"]
+	path = external/linmath
+	url = https://github.com/datenwolf/linmath.h.git
